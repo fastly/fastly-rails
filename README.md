@@ -88,7 +88,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    set_surrogate_key_header @book.resource_key
+    set_surrogate_key_header @book.record_key
   end
 end
 ````
