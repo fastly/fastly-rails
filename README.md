@@ -67,7 +67,7 @@ end
 
 ### Headers
 
-By default we have included a [before_filter](https://github.com/fastly/fastly-rails/blob/master/lib/fastly_rails/action_controller/cache_control_headers.rb#L6) that sets Cache-Control and Surrogate-Control header with a default of 30 days (remember you can configure this, see the initializer setup above).
+By default we have included a [before_filter](https://github.com/fastly/fastly-rails/blob/master/lib/fastly-rails/action_controller/cache_control_headers.rb#L6) that sets Cache-Control and Surrogate-Control header with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
