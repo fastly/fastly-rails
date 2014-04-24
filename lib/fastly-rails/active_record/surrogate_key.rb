@@ -3,10 +3,6 @@ module FastlyRails
   module SurrogateKey
     extend ActiveSupport::Concern
 
-    included do
-      include InstanceMethods
-    end
-
     module ClassMethods
 
       def purge_all
@@ -19,24 +15,20 @@ module FastlyRails
 
     end
 
-    module InstanceMethods
+    def record_key
+      "#{table_key}/#{id}"
+    end
 
-      def record_key
-        "#{table_key}/#{id}"
-      end
+    def table_key
+      self.class.table_key
+    end
 
-      def table_key
-        self.class.table_key
-      end
+    def purge
+      FastlyRails.client.purge(record_key)
+    end
 
-      def purge
-        FastlyRails.client.purge(record_key)
-      end
-
-      def purge_all
-        self.class.purge_all
-      end
-
+    def purge_all
+      self.class.purge_all
     end
 
   end
