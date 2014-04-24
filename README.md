@@ -157,6 +157,12 @@ Check out our example [todo app](https://github.com/mmay/todo) which has a full 
 
 ## Testing
 
+First, install all required gems:
+
+```ruby
+appraisal bundle install
+```
+
 This engine is capable of testing against multiple versions of Rails.  It uses the appraisal gem.  To make this happen, use the appraisal command in lieu of `rake test`:
 
 ````ruby

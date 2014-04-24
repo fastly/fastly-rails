@@ -13,9 +13,13 @@ module FastlyRails
     end
 
     def authenticatable?
-      return true if api_key
+      !!(api_key || has_credentials?)
+    end
 
-      !!(user && password)
+    private
+
+    def has_credentials?
+      user && password
     end
   end
 end
