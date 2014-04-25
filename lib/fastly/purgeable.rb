@@ -5,11 +5,6 @@
 # This calls save on the @article and then makes a call to fastly to purge from cache
 module Fastly
   class Purgeable
-
-    def self.initialize
-    end
-
-
     # These methods need to hook into activerecord
     # Calls super
     # Purges the object from the fastly cache
@@ -44,12 +39,5 @@ module Fastly
       super
       Fastly.purge(table_key)
     end
-
-    def update_attribute
-    end
-
-    def update_attributes
-    end
-
   end
 end
