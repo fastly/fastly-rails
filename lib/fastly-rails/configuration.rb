@@ -1,5 +1,6 @@
 module FastlyRails
   class Configuration
+    # 30 days
     MAX_AGE_DEFAULT = '2592000'
 
     attr_accessor :api_key, :user, :password, :max_age
