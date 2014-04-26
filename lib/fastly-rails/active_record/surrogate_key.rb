@@ -1,4 +1,4 @@
-# adds surrogate key instance methods to the models that inherit from activerecord
+# Adds surrogate key methods to ActiveRecord models
 module FastlyRails
   module SurrogateKey
     extend ActiveSupport::Concern
