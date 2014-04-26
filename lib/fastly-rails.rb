@@ -7,23 +7,22 @@ module FastlyRails
 
   attr_reader :client, :configuration
 
-  def configuration
+  def self.configuration
     @configuration ||= Configuration.new
   end
 
-  def configure
+  def self.configure
     yield configuration if block_given?
   end
 
-  def client
-      raise NoAuthCredentialsProvidedError unless configuration.authenticatable?
-      @client ||= Client.new(
-        :api_key  => configuration.api_key,
-        :user     => configuration.user,
-        :password => configuration.password,
-      )
-  end
+  def self.client
+    raise NoAuthCredentialsProvidedError unless configuration.authenticatable?
 
-  extend self
+    @client ||= Client.new(
+      :api_key  => configuration.api_key,
+      :user     => configuration.user,
+      :password => configuration.password,
+    )
+  end
 
 end
