@@ -23,9 +23,9 @@ Create an initializer for Fastly configuration
 
 ````ruby
 FastlyRails.configure do |c|
-  c.api_key = 'SOMETHING'
-  c.user = 'SOMEONE'
-  c.password = 'SOMEPASS'
+  c.api_key = ENV['FASTLY_API_KEY']
+  c.user = ENV['FASTLY_USER']
+  c.password = ENV['FASTLY_PASSWORD']
   c.max_age = 86400 # time in seconds, optional, defaults to 2592000
 end
 ````
