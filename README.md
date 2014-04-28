@@ -4,7 +4,7 @@ Fastly dynamic caching integration for Rails.
 
 This plugin does three main things:
 - Provides instance and class methods on ActiveRecord objects to help with surrogate keys, including purging
-- Sets up Cache-Control and Surrogate-Control response headers
+- Provides helpers to set Cache-Control and Surrogate-Control response headers
 - Provides a controller helper method to set surrogate keys on responses
 
 If you're not familiar with Fastly Surrogate Keys, you might want to check out [API Caching](http://www.fastly.com/blog/api-caching-part-1) and [Fastly Surrogate Keys](http://www.fastly.com/blog/surrogate-keys-part-1) for a primer.
@@ -67,7 +67,7 @@ end
 
 ### Headers
 
-By default we have included a [before_filter](https://github.com/fastly/fastly-rails/blob/master/lib/fastly-rails/action_controller/cache_control_headers.rb#L6) that sets Cache-Control and Surrogate-Control header with a default of 30 days (remember you can configure this, see the initializer setup above).
+This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control header with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
@@ -75,11 +75,10 @@ To do this use the `set_surrogate_key_header` method on GET actions.
 
 ````ruby
 class BooksController < ApplicationController
-  # this before_filter included by inheriting from ActionController
-  # before_filter :set_cache_control_headers, only: [:index, :show]
-  # you can add or remove actions as need by setting another before_filter
-  # e.g. before_filter :set_cache_control_headers, only: [:my_custom_action]
-  # or skip_before_filter :set_cache_control_headers, only: [:index]
+  # include this before_filter in controller endpoints that you wish to edge cache
+  before_filter :set_cache_control_headers, only: [:index, :show]
+  # This can be used with any customer actions. Set these headers for GETs that you want to cache 
+  # e.g. before_filter :set_cache_control_headers, only: [:index, :show, :my_custom_action]
 
   def index
     @books = Book.all
