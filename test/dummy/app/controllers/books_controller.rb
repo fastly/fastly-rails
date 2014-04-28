@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
 
+  before_filter :set_cache_control_headers, only: [:index, :show]
   before_filter :find_book, :only => [:show, :edit, :update, :destroy]
 
   def index
