@@ -2,10 +2,6 @@ module FastlyRails
   module CacheControlHeaders
     extend ActiveSupport::Concern
 
-    included do
-      before_filter :set_cache_control_headers, only: [:index, :show]
-    end
-
     # Sets Cache-Control and Surrogate-Control headers
     # Surrogate-Control is stripped at the cache, Cache-Control persists (in case of other caches in front of fastly)
     # Defaults are:
