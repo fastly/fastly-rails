@@ -35,7 +35,7 @@ end
 
 ### Surrogate Keys
 
-Surrogate keys are what Fastly uses to purge indivual objects from our caches.
+Surrogate keys are what Fastly uses to purge groups of individual objects from our caches.
 
 This plugin adds a few methods to generate surrogate keys automatically.  `table_key` and `record_key` methods are added to any ActiveRecord::Base instance.  `table_key` is also added to any ActiveRecord::Base class.  In fact, `table_key` on an instance just calls `table_key` on the class.
 
