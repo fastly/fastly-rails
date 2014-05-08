@@ -182,9 +182,12 @@ Rails:
   - v4.0.5
   - v4.1.1
 
+### Other Platforms
+As of v0.1.2, *experimental* Mongoid support was added by @joshfrench of [Upworthy](http://www.upworthy.com/).
+
 ## Credits
 
-This plugin was developed with lots of help from our friend at [Hotel Tonight](http://www.hoteltonight.com), [Harlow Ward](https://twitter.com/futuresanta). Check out his blog about [Cache Invalidation with Fastly Surrogate Keys](http://www.hward.com/varnish-cache-invalidation-with-fastly-surrogate-keys) which is where many of the ideas used in this plugin originated.
+This plugin was developed by [Fastly](http://www.fastly.com/) with lots of help from our friend at [Hotel Tonight](http://www.hoteltonight.com), [Harlow Ward](https://twitter.com/futuresanta). Check out his blog about [Cache Invalidation with Fastly Surrogate Keys](http://www.hward.com/varnish-cache-invalidation-with-fastly-surrogate-keys) which is where many of the ideas used in this plugin originated.
 
 --
 This project rocks and uses MIT-LICENSE.
