@@ -1,4 +1,4 @@
-# Fastly Rails Plugin
+# Fastly Rails Plugin [![Build Status](https://travis-ci.org/fastly/fastly-rails.svg?branch=master)](https://travis-ci.org/fastly/fastly-rails)
 
 Fastly dynamic caching integration for Rails.
 
@@ -158,17 +158,29 @@ Check out our example [todo app](https://github.com/mmay/todo) which has a full 
 
 First, install all required gems:
 
-```ruby
-appraisal bundle install
+```sh
+$ appraisal install
 ```
 
 This engine is capable of testing against multiple versions of Rails.  It uses the appraisal gem.  To make this happen, use the appraisal command in lieu of `rake test`:
 
-````ruby
-appraisal rake test # tests against all the defined versions in the Appraisals file
+```sh
+$ appraisal rake test # tests against all the defined versions in the Appraisals file
 
-appraisal rails-3 rake test # finds a defined version in the Appraisals file called "rails-3" and only runs tests against this version
+$ appraisal rails-3 rake test # finds a defined version in the Appraisals file called "rails-3" and only runs tests against this version
 ````
+
+## Supported Platforms
+We [run tests](https://travis-ci.org/fastly/fastly-rails) using all combinations of the following versions of Ruby and Rails:
+
+Ruby:
+  - 1.9.3
+  - 2.1.1
+
+Rails:
+  - v3.2.18
+  - v4.0.5
+  - v4.1.1
 
 ## Credits
 
