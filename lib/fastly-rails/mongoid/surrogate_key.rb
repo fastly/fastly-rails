@@ -1,6 +1,6 @@
 # Adds surrogate key methods to ActiveRecord models
 module FastlyRails
-  module ActiveRecord
+  module Mongoid
     module SurrogateKey
       extend ActiveSupport::Concern
 
@@ -11,7 +11,7 @@ module FastlyRails
         end
 
         def table_key
-          table_name
+          collection_name
         end
 
       end

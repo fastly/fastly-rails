@@ -1,4 +1,5 @@
 require 'fastly-rails/active_record/surrogate_key'
+require 'fastly-rails/mongoid/surrogate_key'
 require 'fastly-rails/action_controller/cache_control_headers'
 require 'fastly-rails/action_controller/surrogate_control_headers'
 
@@ -17,7 +18,11 @@ module FastlyRails
     end
 
     ActiveSupport.on_load :active_record do
-      ActiveRecord::Base.send :include, FastlyRails::SurrogateKey
+      ::ActiveRecord::Base.send :include, FastlyRails::ActiveRecord::SurrogateKey
+    end
+
+    ActiveSupport.on_load :mongoid do
+      ::Mongoid::Document.send :include, FastlyRails::Mongoid::SurrogateKey
     end
 
   end
