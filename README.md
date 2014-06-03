@@ -27,9 +27,11 @@ FastlyRails.configure do |c|
   c.user = ENV['FASTLY_USER']
   c.password = ENV['FASTLY_PASSWORD']
   c.max_age = 86400 # time in seconds, optional, defaults to 2592000
+  c.service_id = ENV['SERVICE_ID'] # whichever Fastly service you will be using
 end
 ````
 > Note: purging only requires that you authenticate with your `api_key`. `user` and `password` are added for full compatibility with the Fastly API.
+> Also, you must provide a service_id for purges to work.
 
 ## Usage
 
@@ -141,6 +143,19 @@ end
 
 We have left these out intentially, as they could potentially cause issues when running locally or testing.
 
+### Service id
+
+One thing to note is that currently we expect a service_id to be defined in your FastlyRails.configuration.  However, we've added localized methods so that your models can override your global service_id, if you needed to operate on more than one for any reason.
+
+Currently, this would require you to basically redefine `service_id` on the class level of your model:
+
+````ruby
+class Book < ActiveRecord::Base
+  def self.service_id
+    'MYSERVICEID'
+  end
+end
+````
 
 ### Example
 
