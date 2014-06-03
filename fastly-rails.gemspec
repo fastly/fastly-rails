@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "ffaker"
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "appraisal"
+  s.add_development_dependency "webmock"
 end
