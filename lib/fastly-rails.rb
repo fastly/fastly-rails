@@ -15,6 +15,11 @@ module FastlyRails
     yield configuration if block_given?
   end
 
+  def self.service_id
+    raise NoServiceIdProvidedError if configuration.invalid_service_id?
+    configuration.service_id
+  end
+
   def self.client
     raise NoAuthCredentialsProvidedError unless configuration.authenticatable?
 

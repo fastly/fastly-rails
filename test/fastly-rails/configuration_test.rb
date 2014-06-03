@@ -12,7 +12,8 @@ describe FastlyRails::Configuration do
       :api_key,
       :user,
       :password,
-      :max_age
+      :max_age,
+      :service_id
     ]
 
     methods.each do |method|
@@ -67,5 +68,22 @@ describe FastlyRails::Configuration do
 
   it 'should have a default value for max_age since none was provided' do
     assert_equal FastlyRails::Configuration.max_age_default, configuration.max_age
+  end
+
+  describe 'invalid_service_id?' do
+    it 'should return true for a nil service_id' do
+      assert_nil configuration.service_id
+      assert_equal true, configuration.invalid_service_id?
+    end
+
+    it 'should return true for a blank service_id' do
+      configuration.service_id = ''
+      assert_equal true, configuration.invalid_service_id?
+    end
+
+    it 'should return false for a non-blank, non-nil service_id' do
+      configuration.service_id = 'notblank'
+      assert_equal false, configuration.invalid_service_id?
+    end
   end
 end
