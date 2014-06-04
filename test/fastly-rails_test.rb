@@ -16,6 +16,10 @@ describe FastlyRails do
 
   describe 'credentials not provided' do
 
+    before do
+      FastlyRails.instance_variable_set('@configuration', FastlyRails::Configuration.new)
+    end
+
     it 'should raise an error if configuration is not authenticatable' do
 
       assert_equal false, configuration.authenticatable?
