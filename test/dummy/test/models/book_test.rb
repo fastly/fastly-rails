@@ -38,4 +38,26 @@ describe Book do
     assert_equal Book.table_key, book.table_key
   end
 
+  describe 'service_id' do
+    before do
+      FastlyRails.configuration.service_id = 'someserviceid'
+    end
+
+    it 'should have class.service_id' do
+      assert_respond_to Book, :service_id
+    end
+
+    it 'should have instance.service_id' do
+      assert_respond_to book, :service_id
+    end
+
+    it 'should be class.service_id == instance.service_id' do
+      assert_equal Book.service_id, book.service_id
+    end
+
+    after do
+      FastlyRails.configuration.service_id = nil
+    end
+  end
+
 end

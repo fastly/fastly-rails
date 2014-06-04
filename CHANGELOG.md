@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.1.3 / 2014-06-03
+  * Service_id configuration (required as of 0.1.3)
+  * Fix purging (bug posted by @scaryguy)
+
 ### 0.1.2 / 2014-05-07
   * Experimental Mongoid support (@joshfrench)
   * Explicitly test against Rails 4.1
