@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails"
-  s.add_dependency "fastly"
+  s.add_dependency 'fastly', '~> 1.1.1'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "database_cleaner"
