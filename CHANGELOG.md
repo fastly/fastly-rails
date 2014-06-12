@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.1.4 / 2014-06-12
+  * Bump version of `fastly` gem used (see: [issue #23](https://github.com/fastly/fastly-rails/issues/23))
+
 ### 0.1.3 / 2014-06-03
   * Service_id configuration (required as of 0.1.3)
   * Fix purging (bug posted by @scaryguy)
