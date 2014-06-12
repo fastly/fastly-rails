@@ -19,6 +19,18 @@ APP_RAKEFILE = File.expand_path("../test/dummy/Rakefile", __FILE__)
 
 Bundler::GemHelper.install_tasks
 
+namespace :test do
+  desc 'Install dependencies for all tests with appraisal'
+  task :setup do
+    sh 'appraisal install'
+  end
+
+  desc 'Run all tests with appraisal'
+  task :all do
+    sh 'appraisal rake test'
+  end
+end
+
 require 'rake/testtask'
 
 Rake::TestTask.new(:test) do |t|

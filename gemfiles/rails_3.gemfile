@@ -3,6 +3,5 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 3.2.18"
-gem "webmock"
 
 gemspec :path => "../"

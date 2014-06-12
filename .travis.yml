@@ -1,6 +1,6 @@
 language: ruby
-before_script: 'bundle exec appraisal install'
-script: 'bundle exec appraisal rake test'
+before_script: 'bundle exec rake test:setup'
+script: 'bundle exec rake test:all'
 rvm:
   - 2.1.1
   - 1.9.3
