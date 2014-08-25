@@ -5,7 +5,7 @@ module FastlyRails
     # Sets Cache-Control and Surrogate-Control headers
     # Surrogate-Control is stripped at the cache, Cache-Control persists (in case of other caches in front of fastly)
     # Defaults are:
-    #  Cache-Control: 'public, no-cache, s-maxage: 30 days'
+    #  Cache-Control: 'public, no-cache'
     #  Surrogate-Control: 'max-age: 30 days
     # custom config example: 
     #  {cache_control: 'public, no-cache, maxage=xyz', surrogate_control: 'max-age: blah'}
