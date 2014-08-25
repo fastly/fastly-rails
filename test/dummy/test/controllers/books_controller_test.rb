@@ -17,6 +17,16 @@ class BooksControllerTest < ActionController::TestCase
     get :index
     assert_response :success, 'it should return successfully'
     assert_equal @no_of_books, assigns(:books).count, "it should retrieve #{@no_of_books} books"
+    # should strip out session data
+    assert_equal false, response.headers.key?('Set-Cookie')
+  end
+
+  test "index_with_session" do
+    get :index_with_session
+    assert_response :success, 'it should return successfully'
+    assert_equal @no_of_books, assigns(:books).count, "it should retrieve #{@no_of_books} books"
+    # should leave session data alone
+    assert_equal true, response.headers.key?('Set-Cookie')
   end
 
   test "show" do

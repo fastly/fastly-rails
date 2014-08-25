@@ -13,9 +13,22 @@ class FastlyHeadersTest < ActionDispatch::IntegrationTest
     assert response.headers.key?('Cache-Control')
     assert_equal 'public, no-cache', response.headers['Cache-Control']
 
+    # should strip out session data
+    assert_equal false, response.headers.key?('Set-Cookie')
+
     assert response.headers.key?('Surrogate-Control')
     max_age = FastlyRails.configuration.max_age
     assert_equal "max-age=#{max_age}", response.headers['Surrogate-Control']
+  end
+
+  test 'allows session data when not using cache-control-headers method' do
+    get '/books_with_session'
+    assert_response :success
+
+    assert request.session_options[:skip].nil?
+    assert response.headers.key?('Set-Cookie')
+    assert response.headers.key?('Cache-Control')
+    assert_equal false, response.headers.key?('Surrogate-Control')
   end
 
   test '/books/:id show page should have fastly headers' do
