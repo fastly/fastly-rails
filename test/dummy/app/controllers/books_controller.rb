@@ -7,6 +7,11 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  def index_with_session
+    cookies[:id] = "testly"
+    @books = Book.all
+  end
+
   def show
   end
 
