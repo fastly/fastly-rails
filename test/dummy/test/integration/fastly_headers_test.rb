@@ -67,11 +67,9 @@ class FastlyHeadersTest < ActionDispatch::IntegrationTest
     assert_equal 'no-cache', response.headers['Cache-Control']
 
     assert !response.headers.key?('Surrogate-Control')
-
   end
 
   test 'DELETE /books/:id should not have fastly headers/ fastly header values' do
-
     create :book, :id => 1
 
     delete '/books/1'
@@ -84,8 +82,5 @@ class FastlyHeadersTest < ActionDispatch::IntegrationTest
     assert_equal 'no-cache', response.headers['Cache-Control']
 
     assert !response.headers.key?('Surrogate-Control')
-
   end
-
 end
-

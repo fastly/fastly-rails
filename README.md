@@ -84,7 +84,7 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-    set_surrogate_key_header @book.table_key
+    set_surrogate_key_header 'books', @books.map(&:record_key)
   end
 
   def show

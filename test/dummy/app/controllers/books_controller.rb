@@ -1,13 +1,14 @@
 class BooksController < ApplicationController
-
   before_filter :set_cache_control_headers, only: [:index, :show]
   before_filter :find_book, :only => [:show, :edit, :update, :destroy]
 
   def index
     @books = Book.all
+    set_surrogate_key_header 'books', @books.map(&:record_key)
   end
 
   def show
+    set_surrogate_key_header @book.record_key
   end
 
   def new
