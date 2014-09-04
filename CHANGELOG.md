@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.1.5 / 2014-09-04
+  * Surrogate key helper can now accept multiple keys (PR by @jessieay)
+
 ### 0.1.4 / 2014-06-12
   * Bump version of `fastly` gem used (see: [issue #23](https://github.com/fastly/fastly-rails/issues/23))
   * Add `test:setup` and `test:all` Rake tasks
