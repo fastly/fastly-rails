@@ -33,4 +33,31 @@ describe FastlyRails::Client do
 
   end
 
+  describe 'purge_by_key' do
+    it 'raises if purge called and no service id configured' do
+      FastlyRails.configuration.service_id = nil
+
+      assert_raises FastlyRails::NoServiceIdProvidedError do
+        client.purge_by_key('test')
+      end
+    end
+
+    it 'should call Fastly::Client.post method with the purge url' do
+      FastlyRails.configuration.service_id = 'testly'
+      assert_equal "/service/#{FastlyRails.service_id}/purge/test", client.purge_url('test')
+
+      resp = client.purge_by_key('test')
+      assert_equal "ok", resp['status']
+    end
+
+    it 'should be authed' do
+      assert_equal true, client.fully_authed?
+
+      client.client.user = nil
+      client.client.password = nil
+      assert_equal false, client.fully_authed?
+      assert_equal true, client.authed?
+    end
+  end
+
 end

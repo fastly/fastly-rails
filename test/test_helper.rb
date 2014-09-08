@@ -28,11 +28,15 @@ class Minitest::Spec
   include FactoryGirl::Syntax::Methods
 
   before :each do
-    stub_request(:any, /.*/).
+    stub_request(:any, "https://api.fastly.com/login").
       to_return(
         :status   => 200,
         :body     => "{}",
         :message  => "{}"
+    )
+    stub_request(:post, /https:\/\/api.fastly.com\/service\/.*\/purge\/.*/)
+    .to_return(
+      body: "{\"status\":\"ok\"}"
     )
 
     DatabaseCleaner.start
@@ -63,5 +67,4 @@ class ActionDispatch::IntegrationTest
 
 end
 
-# Stub any request to api.fastly.com
 

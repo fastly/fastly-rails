@@ -1,4 +1,6 @@
 # Adds surrogate key methods to ActiveRecord models
+# Purge methods use a POST over PURGE
+# The choice of this HTTP method should not effect anything
 module FastlyRails
   module ActiveRecord
     module SurrogateKey
@@ -7,7 +9,7 @@ module FastlyRails
       module ClassMethods
 
         def purge_all
-          FastlyRails.client.get_service(service_id).purge_by_key(table_key)
+          FastlyRails::Client.purge_by_key(table_key)
         end
 
         def table_key
@@ -28,7 +30,7 @@ module FastlyRails
       end
 
       def purge
-        FastlyRails.client.get_service(service_id).purge_by_key(record_key)
+        FastlyRails::Client.purge_by_key(record_key)
       end
 
       def purge_all
