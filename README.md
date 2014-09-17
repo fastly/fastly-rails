@@ -94,6 +94,33 @@ class BooksController < ApplicationController
 end
 ````
 
+### [Optional] Removing `Set-Cookie` headers
+
+The `set_cache_control_headers` method removes the `Set-Cookie` header from a
+request. In some cases, other libraries will have middleware that inserts a
+`Set-Cookie` header into your request *after* fastly-rails removes it. This is
+problematic because Fastly will not cache any pages with a `Set-Cookie` header.
+
+In order to remove the `Set-Cookie` header, fastly-rails provides an optional
+piece of middleware that removes `Set-Cookie` when the `Surrogate-Control`
+header is present (the `Surrogate-Control` header is also inserted by the
+`set_cache_control_headers` method and indicates that you want the endpoint to
+be cached by Fastly and do not need cookies).
+
+To override a piece of middleware in Rails, you must insert middleware before
+it. Once you've identified which middleware is inserting the `Set-Cookie`
+header, add the following (in this example, `ExampleMiddleware` is what we are
+trying to override`:
+
+```ruby
+# config/application.rb
+
+  config.middleware.insert_before(
+    ExampleMiddleware,
+    "FastlyRails::Rack::RemoveSetCookieHeader"
+  )
+```
+
 ### Purges
 
 Any object that inherits from ActiveRecord will have `purge_all` and `table_key` class methods available as well as `purge` and `purge_all` instance methods.

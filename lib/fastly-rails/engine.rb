@@ -2,6 +2,7 @@ require 'fastly-rails/active_record/surrogate_key'
 require 'fastly-rails/mongoid/surrogate_key'
 require 'fastly-rails/action_controller/cache_control_headers'
 require 'fastly-rails/action_controller/surrogate_key_headers'
+require 'fastly-rails/rack/remove_set_cookie_header'
 
 module FastlyRails
   class Engine < ::Rails::Engine
