@@ -2,10 +2,12 @@
 
 Fastly dynamic caching integration for Rails.
 
-This plugin does three main things:
-- Provides instance and class methods on ActiveRecord objects to help with surrogate keys, including purging
-- Provides helpers to set Cache-Control and Surrogate-Control response headers
-- Provides a controller helper method to set surrogate keys on responses
+To use Fastly dynamic caching, you tag *any* response you wish to cache with unique Surrogate-Key HTTP Header(s) and then hit the Fastly API purge endpoint with the surrogate key when the response changes. The purge instantly replaces the cached response with a fresh response from origin.
+
+This plugin provides three main things:
+- Instance and class methods on ActiveRecord (or Mongoid) objects for surrogate keys and purging
+- Controller helpers to set Cache-Control and Surrogate-Control response headers
+- A controller helper to set Surrogate-Key headers on responses
 
 If you're not familiar with Fastly Surrogate Keys, you might want to check out [API Caching](http://www.fastly.com/blog/api-caching-part-1) and [Fastly Surrogate Keys](http://www.fastly.com/blog/surrogate-keys-part-1) for a primer.
 
@@ -23,14 +25,12 @@ Create an initializer for Fastly configuration
 
 ````ruby
 FastlyRails.configure do |c|
-  c.api_key = ENV['FASTLY_API_KEY']
-  c.user = ENV['FASTLY_USER']
-  c.password = ENV['FASTLY_PASSWORD']
-  c.max_age = 86400 # time in seconds, optional, defaults to 2592000
-  c.service_id = ENV['SERVICE_ID'] # whichever Fastly service you will be using
+  c.api_key = ENV['FASTLY_API_KEY']  # Fastly api key, required
+  c.max_age = 86400                  # time in seconds, optional, defaults to 2592000 (30 days)
+  c.service_id = ENV['SERVICE_ID']   # The Fastly service you will be using, required
 end
 ````
-> Note: purging only requires that you authenticate with your `api_key`. `user` and `password` are added for full compatibility with the Fastly API.
+> Note: purging only requires that you authenticate with your `api_key`. However, you can provide a `user` and `password` if you are using other endpoints in fastly-ruby that require full-auth.
 > Also, you must provide a service_id for purges to work.
 
 ## Usage
@@ -63,13 +63,13 @@ def self.table_key
 end
 
 def record_key
-  "my_custom_record_key" #you should use something unique to each record
+  "my_custom_record_key"# Ensure these are unique for each record
 end
 ````
 
 ### Headers
 
-This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control header with a default of 30 days (remember you can configure this, see the initializer setup above).
+This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` or `after_filter` [see note on cookies below]() to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
@@ -93,33 +93,6 @@ class BooksController < ApplicationController
   end
 end
 ````
-
-### [Optional] Removing `Set-Cookie` headers
-
-The `set_cache_control_headers` method removes the `Set-Cookie` header from a
-request. In some cases, other libraries will have middleware that inserts a
-`Set-Cookie` header into your request *after* fastly-rails removes it. This is
-problematic because Fastly will not cache any pages with a `Set-Cookie` header.
-
-In order to remove the `Set-Cookie` header, fastly-rails provides an optional
-piece of middleware that removes `Set-Cookie` when the `Surrogate-Control`
-header is present (the `Surrogate-Control` header is also inserted by the
-`set_cache_control_headers` method and indicates that you want the endpoint to
-be cached by Fastly and do not need cookies).
-
-To override a piece of middleware in Rails, you must insert middleware before
-it. Once you've identified which middleware is inserting the `Set-Cookie`
-header, add the following (in this example, `ExampleMiddleware` is what we are
-trying to override`:
-
-```ruby
-# config/application.rb
-
-  config.middleware.insert_before(
-    ExampleMiddleware,
-    "FastlyRails::Rack::RemoveSetCookieHeader"
-  )
-```
 
 ### Purges
 
@@ -168,7 +141,7 @@ class Book < ActiveRecord
 end
 ````
 
-We have left these out intentially, as they could potentially cause issues when running locally or testing.
+We have left these out intentially, as they could potentially cause issues when running locally or testing. If you do use these, pay attention, as using callbacks could also inadvertently overwrite HTTP Headers like Cache-Control or Set-Cookie and cause responses to not be properly cached.
 
 ### Service id
 
@@ -183,6 +156,40 @@ class Book < ActiveRecord::Base
   end
 end
 ````
+
+
+### Sessions, Cookies, and private data
+
+By default, Fastly will not cache any response containing a `Set-Cookie` header. In general, this is beneficial because caching responses that contain sensitive data is typically not done on shared caches.
+
+In this plugin the `set_cache_control_headers` method removes the `Set-Cookie` header from a
+request. In some cases, other libraries, particularily middleware, may insert or modify HTTP Headers outside the scope of where the `set_cache_control_heades` method is invoked in a controller action. For example, some authentication middleware will add a `Set-Cookie` header into requests *after* fastly-rails removes it.
+
+This can cause some requests that can (and should) be cached to not be cached due to the presence of `Set-Cookie`.
+
+In order to remove the `Set-Cookie` header in these cases, fastly-rails provides an optional
+piece of middleware that removes `Set-Cookie` when the `Surrogate-Control` or `Surrogate-Key`
+header is present (the `Surrogate-Control` header is also inserted by the
+`set_cache_control_headers` method and indicates that you want the endpoint to
+be cached by Fastly and do not need cookies).
+
+#### fastly-rails middleware to delete `Set-Cookie`
+
+To override a piece of middleware in Rails, insert custom middleware before
+it. Once you've identified which middleware is inserting the `Set-Cookie`
+header, add the following (in this example, `ExampleMiddleware` is what we are
+trying to override`:
+
+```ruby
+# config/application.rb
+
+  config.middleware.insert_before(
+    ExampleMiddleware,
+    "FastlyRails::Rack::RemoveSetCookieHeader"
+  )
+```
+
+
 
 ### Example
 
