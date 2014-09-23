@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.1.6 / 2014-09-23
+  * Add optional middleware to strip `Set-Cookie` HTTP Header (Thanks @jessieay!)
+
 ### 0.1.5 / 2014-09-04
   * Surrogate key helper can now accept multiple keys (PR by @jessieay)
 
