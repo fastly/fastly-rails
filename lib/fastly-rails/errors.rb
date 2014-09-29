@@ -1,6 +1,6 @@
 module FastlyRails
 
-  class NoAuthCredentialsProvidedError < ArgumentError; end
+  class NoAPIKeyProvidedError < ArgumentError; end
 
   class NoServiceIdProvidedError < ArgumentError; end
 end

@@ -21,7 +21,7 @@ module FastlyRails
   end
 
   def self.client
-    raise NoAuthCredentialsProvidedError unless configuration.authenticatable?
+    raise NoAPIKeyProvidedError unless configuration.authenticatable?
 
     @client ||= Client.new(
       :api_key  => configuration.api_key,
