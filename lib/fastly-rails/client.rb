@@ -8,6 +8,7 @@ module FastlyRails
     end
 
     def purge_by_key(key)
+      client.require_key!
       client.post purge_url(key)
     end
 
