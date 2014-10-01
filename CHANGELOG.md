@@ -1,7 +1,11 @@
 # Changelog
 
+### 0.1.7 / 2014-10-01
+  * Fix regression with erroneously sending `purge_by_key` method as class-level instead of instance-level (@jumph4x )
+
 ### 0.1.6 / 2014-09-23
   * Add optional middleware to strip `Set-Cookie` HTTP Header (Thanks @jessieay!)
+  * !! Introduces erroneous purges. Use 0.1.7 instead !!
 
 ### 0.1.5 / 2014-09-04
   * Surrogate key helper can now accept multiple keys (PR by @jessieay)
