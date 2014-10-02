@@ -14,7 +14,7 @@ module FastlyRails
     end
 
     def authenticatable?
-      !!(api_key || has_credentials?)
+      !!api_key
     end
 
     def invalid_service_id?

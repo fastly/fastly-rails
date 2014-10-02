@@ -42,7 +42,7 @@ describe FastlyRails::Configuration do
       assert_respond_to configuration, :authenticatable?
     end
 
-    it 'should return false if api_key, user, and password are nil' do
+    it 'should return false if api_key is nil' do
       assert_equal false, configuration.authenticatable?
     end
 
@@ -53,16 +53,15 @@ describe FastlyRails::Configuration do
     end
 
     it 'should return true if only api_key is not nil' do
-      configuration.api_key = 'key'
-
+      configuration.api_key = 'test'
       assert_equal true, configuration.authenticatable?
     end
 
-    it 'should return true if if user and password are not nil' do
+    it 'should return false if only user and password are not nil' do
       configuration.user      = 'user'
       configuration.password  = 'password'
 
-      assert_equal true, configuration.authenticatable?
+      assert_equal false, configuration.authenticatable?
     end
   end
 
