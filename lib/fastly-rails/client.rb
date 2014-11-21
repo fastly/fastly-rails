@@ -8,8 +8,10 @@ module FastlyRails
     end
 
     def purge_by_key(key)
-      client.require_key!
-      client.post purge_url(key)
+      unless ENV["FASTLY_CACHE_DISABLED"].present?
+        client.require_key!
+        client.post purge_url(key)
+      end
     end
 
     def purge_url(key)
