@@ -50,6 +50,20 @@ describe FastlyRails::Client do
       assert_equal "ok", resp['status']
     end
 
+    it 'should call the configured callback after purge' do
+      FastlyRails.configuration.service_id = 'testly'
+      @called_url, @called_key = nil
+      callback = lambda {|key,url|
+        @called_key = key
+        @called_url = url
+      }
+      FastlyRails.configuration.after_purge = callback
+      resp = client.purge_by_key('test')
+      assert_equal "ok", resp['status']
+      assert_equal client.purge_url('test'), @called_url, "The callback was not called or the url was not passed"
+      assert_equal 'test', @called_key, "The callback was not called or the key was not passed"
+    end
+
     it 'should be authed' do
       assert_equal true, client.fully_authed?
 
