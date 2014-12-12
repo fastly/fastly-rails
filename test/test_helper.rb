@@ -31,8 +31,7 @@ class Minitest::Spec
     stub_request(:any, "https://api.fastly.com/login").
       to_return(
         :status   => 200,
-        :body     => "{}",
-        :message  => "{}"
+        :body     => "{}"
     )
     stub_request(:post, /https:\/\/api.fastly.com\/service\/.*\/purge\/.*/)
     .to_return(
@@ -59,12 +58,9 @@ class ActionDispatch::IntegrationTest
     stub_request(:any, /.*/).
     to_return(
         :status   => 200,
-        :body     => "{}",
-        :message  => "{}"
+        :body     => "{}"
     )
 
   end
 
 end
-
-
