@@ -6,8 +6,7 @@ class BooksControllerTest < ActionController::TestCase
     WebMock.stub_request(:any, /.*/).
     to_return(
         :status   => 200,
-        :body     => "{}",
-        :message  => "{}"
+        :body     => "{}"
     )
     @no_of_books = 5
     create_list :book, @no_of_books
