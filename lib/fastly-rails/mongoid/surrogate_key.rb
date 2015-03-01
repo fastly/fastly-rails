@@ -7,7 +7,7 @@ module FastlyRails
       module ClassMethods
 
         def purge_all
-          FastlyRails.client.purge_by_key(table_key)
+          FastlyRails.purge_by_key(table_key)
         end
 
         def table_key
@@ -28,7 +28,7 @@ module FastlyRails
       end
 
       def purge
-        FastlyRails.client.purge_by_key(record_key)
+        FastlyRails.purge_by_key(record_key)
       end
 
       def purge_all
