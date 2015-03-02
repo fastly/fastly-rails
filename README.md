@@ -28,6 +28,8 @@ FastlyRails.configure do |c|
   c.api_key = ENV['FASTLY_API_KEY']  # Fastly api key, required
   c.max_age = 86400                  # time in seconds, optional, defaults to 2592000 (30 days)
   c.service_id = ENV['SERVICE_ID']   # The Fastly service you will be using, required
+  c.purging_enabled = !Rails.env.development? # No need to configure a client locally
+  c.cache_headers_enabled = !Rails.env.development?
 end
 ````
 > Note: purging only requires that you authenticate with your `api_key`. However, you can provide a `user` and `password` if you are using other endpoints in fastly-ruby that require full-auth.
@@ -79,7 +81,7 @@ To do this use the `set_surrogate_key_header` method on GET actions.
 class BooksController < ApplicationController
   # include this before_filter in controller endpoints that you wish to edge cache
   before_filter :set_cache_control_headers, only: [:index, :show]
-  # This can be used with any customer actions. Set these headers for GETs that you want to cache 
+  # This can be used with any customer actions. Set these headers for GETs that you want to cache
   # e.g. before_filter :set_cache_control_headers, only: [:index, :show, :my_custom_action]
 
   def index
