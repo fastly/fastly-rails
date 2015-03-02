@@ -2,6 +2,10 @@ require 'test_helper'
 
 class FastlyHeadersTest < ActionDispatch::IntegrationTest
 
+  def setup
+    FastlyRails.configuration.cache_headers_enabled = true
+  end
+
   test '/books index page should have fastly headers' do
 
     get '/books'

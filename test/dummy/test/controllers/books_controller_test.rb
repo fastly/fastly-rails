@@ -10,6 +10,7 @@ class BooksControllerTest < ActionController::TestCase
     )
     @no_of_books = 5
     create_list :book, @no_of_books
+    FastlyRails.configuration.cache_headers_enabled = true
   end
 
   test "index" do

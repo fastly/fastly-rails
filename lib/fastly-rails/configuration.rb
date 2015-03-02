@@ -4,6 +4,7 @@ module FastlyRails
     MAX_AGE_DEFAULT = '2592000'
 
     attr_accessor :api_key, :user, :password, :max_age, :service_id
+    attr_writer :cache_headers_enabled, :purging_enabled
 
     def self.max_age_default
       MAX_AGE_DEFAULT
@@ -19,6 +20,14 @@ module FastlyRails
 
     def invalid_service_id?
       service_id_nil? || service_id_blank?
+    end
+
+    def cache_headers_enabled?
+      @cache_headers_enabled
+    end
+
+    def purging_enabled?
+      @purging_enabled
     end
 
     private

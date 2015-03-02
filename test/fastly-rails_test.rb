@@ -38,6 +38,8 @@ describe FastlyRails do
         c.password  = password
         c.max_age   = max_age
         c.service_id = service_id
+        c.cache_headers_enabled = true
+        c.purging_enabled = true
       end
     end
 
@@ -47,10 +49,27 @@ describe FastlyRails do
       assert_equal password, configuration.password
       assert_equal max_age, configuration.max_age
       assert_equal service_id, configuration.service_id
+      assert_equal true, configuration.cache_headers_enabled?
+      assert_equal true, configuration.purging_enabled?
     end
 
     it 'should return a valid client' do
       assert_instance_of FastlyRails::Client, client
+    end
+  end
+
+  describe 'purge_by_key' do
+    let(:client) {  MiniTest::Mock.new }
+    let(:key) { "key" }
+
+    it 'delegates to the client' do
+      FastlyRails.stub(:client, client) do
+        FastlyRails.stub(:purging_enabled?, true) do
+          client.expect(:purge_by_key, nil, [key])
+          FastlyRails.purge_by_key(key)
+          client.verify
+        end
+      end
     end
   end
 end
