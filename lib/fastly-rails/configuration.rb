@@ -12,6 +12,8 @@ module FastlyRails
 
     def initialize
       @max_age = MAX_AGE_DEFAULT
+      @cache_headers_enabled = true
+      @purging_enabled = true
     end
 
     def authenticatable?
