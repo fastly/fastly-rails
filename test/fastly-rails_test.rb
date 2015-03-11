@@ -38,8 +38,6 @@ describe FastlyRails do
         c.password  = password
         c.max_age   = max_age
         c.service_id = service_id
-        c.cache_headers_enabled = true
-        c.purging_enabled = true
       end
     end
 
@@ -62,13 +60,20 @@ describe FastlyRails do
     let(:client) {  MiniTest::Mock.new }
     let(:key) { "key" }
 
-    it 'delegates to the client' do
+    it 'delegates to the client when purging is enabled' do
       FastlyRails.stub(:client, client) do
         FastlyRails.stub(:purging_enabled?, true) do
           client.expect(:purge_by_key, nil, [key])
           FastlyRails.purge_by_key(key)
           client.verify
         end
+      end
+    end
+
+    it 'does nothing when purging is disabled' do
+      configuration.purging_enabled = false
+      FastlyRails.stub(:client, client) do
+        FastlyRails.purge_by_key(key)
       end
     end
   end

@@ -66,22 +66,34 @@ describe FastlyRails::Configuration do
   end
 
   describe 'cache_headers_enabled?' do
-    before do
-      configuration.cache_headers_enabled = true
+    it 'is enabled by default' do
+      assert_equal true, configuration.cache_headers_enabled?
     end
 
-    it 'is true' do
+    it 'is enabled when set to true' do
+      configuration.cache_headers_enabled = true
       assert_equal true, configuration.cache_headers_enabled?
+    end
+
+    it 'is disabled when set to false' do
+      configuration.cache_headers_enabled = false
+      assert_equal false, configuration.cache_headers_enabled?
     end
   end
 
-  describe 'cache_headers_enabled?' do
-    before do
-      configuration.purging_enabled = true
+  describe 'purging_enabled?' do
+    it 'is enabled by default' do
+      assert_equal true, configuration.purging_enabled?
     end
 
-    it 'is true' do
+    it 'is enabled when set to true' do
+      configuration.purging_enabled = true
       assert_equal true, configuration.purging_enabled?
+    end
+
+    it 'is disabled when set to false' do
+      configuration.purging_enabled = false
+      assert_equal false, configuration.purging_enabled?
     end
   end
 
