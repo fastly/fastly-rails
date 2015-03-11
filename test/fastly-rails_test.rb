@@ -5,19 +5,19 @@ describe FastlyRails do
   let(:user)          { nil }
   let(:password)      { nil }
   let(:max_age)       { 100000 }
-  let(:configuration) { FastlyRails.configuration }
+  let(:configuration) { FastlyRails::Configuration.new }
   let(:service_id)    { 'someserviceid' }
   let(:client)        { FastlyRails.client }
+
+  before do
+    FastlyRails.instance_variable_set('@configuration', configuration)
+  end
 
   it 'should be a module' do
     assert_kind_of Module, FastlyRails
   end
 
   describe 'credentials not provided' do
-    before do
-      FastlyRails.instance_variable_set('@configuration', FastlyRails::Configuration.new)
-    end
-
     it 'should raise an error if configuration is not authenticatable' do
       assert_equal false, configuration.authenticatable?
       assert_equal true, configuration.invalid_service_id?
