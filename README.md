@@ -145,13 +145,13 @@ We have left these out intentially, as they could potentially cause issues when 
 
 ### Service id
 
-One thing to note is that currently we expect a service_id to be defined in your FastlyRails.configuration.  However, we've added localized methods so that your models can override your global service_id, if you needed to operate on more than one for any reason.
+One thing to note is that currently we expect a service_id to be defined in your FastlyRails.configuration.  However, we've added localized methods so that your models can override your global service_id, if you needed to operate on more than one for any reason.  NOTE: As of 0.3.0, we've renamed the class-level and instance-level `service_id` methods to `fastly_service_identifier` in the active_record and mongoid mix-ins.  See the CHANGELOG for a link to the Github issue.
 
-Currently, this would require you to basically redefine `service_id` on the class level of your model:
+Currently, this would require you to basically redefine `fastly_service_identifier` on the class level of your model:
 
 ````ruby
 class Book < ActiveRecord::Base
-  def self.service_id
+  def self.fastly_service_identifier
     'MYSERVICEID'
   end
 end
