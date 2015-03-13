@@ -47,7 +47,7 @@ describe Book do
       assert_respond_to Book, :fastly_service_identifier
     end
 
-    it 'it is an instance method' do
+    it 'is an instance method' do
       assert_respond_to book, :fastly_service_identifier
     end
 
