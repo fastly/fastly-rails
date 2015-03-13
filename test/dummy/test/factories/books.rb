@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :book do
     name  { Faker::Movie.title }
-    service_id 'some-service-id'
+    service_id 'asdf'
   end
 end
