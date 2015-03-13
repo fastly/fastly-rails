@@ -16,7 +16,7 @@ module FastlyRails
           table_name
         end
 
-        def service_id
+        def fastly_service_identifier
           FastlyRails.service_id
         end
       end
@@ -37,8 +37,8 @@ module FastlyRails
         self.class.purge_all
       end
 
-      def service_id
-        self.class.service_id
+      def fastly_service_identifier
+        self.class.fastly_service_identifier
       end
     end
   end
