@@ -55,6 +55,10 @@ describe Book do
       assert_equal Book.fastly_service_identifier, book.fastly_service_identifier
     end
 
+    it 'does not equal the value of `service_id` on the model' do
+      refute_equal book.service_id, book.fastly_service_identifier
+    end
+
     after do
       FastlyRails.configuration.service_id = nil
     end
