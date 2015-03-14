@@ -9,7 +9,9 @@ module FastlyRails
       module ClassMethods
 
         def purge_all
-          FastlyRails.client.purge_by_key(table_key)
+          unless ENV["FASTLY_CACHE_DISABLED"].present?
+            FastlyRails.client.purge_by_key(table_key)
+          end
         end
 
         def table_key
@@ -30,7 +32,9 @@ module FastlyRails
       end
 
       def purge
-        FastlyRails.client.purge_by_key(record_key)
+        unless ENV["FASTLY_CACHE_DISABLED"].present?
+          FastlyRails.client.purge_by_key(record_key)
+        end
       end
 
       def purge_all

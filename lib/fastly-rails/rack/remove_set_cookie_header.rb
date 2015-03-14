@@ -8,8 +8,10 @@ module FastlyRails
       def call(env)
         status, headers, response = @app.call(env)
 
-        if headers["Surrogate-Control"] || headers["Surrogate-Key"]
-          headers.delete("Set-Cookie")
+        unless ENV["FASTLY_CACHE_DISABLED"].present?
+          if headers["Surrogate-Control"] || headers["Surrogate-Key"]
+            headers.delete("Set-Cookie")
+          end
         end
 
         [status, headers, response]
