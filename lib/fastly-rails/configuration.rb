@@ -3,7 +3,7 @@ module FastlyRails
     # 30 days
     MAX_AGE_DEFAULT = '2592000'
 
-    attr_accessor :api_key, :user, :password, :max_age, :service_id
+    attr_accessor :api_key, :user, :password, :max_age, :service_id, :after_purge
 
     def self.max_age_default
       MAX_AGE_DEFAULT
