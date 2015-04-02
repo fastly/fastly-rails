@@ -47,7 +47,6 @@ describe FastlyRails do
       assert_equal password, configuration.password
       assert_equal max_age, configuration.max_age
       assert_equal service_id, configuration.service_id
-      assert_equal true, configuration.cache_headers_enabled?
       assert_equal true, configuration.purging_enabled?
     end
 

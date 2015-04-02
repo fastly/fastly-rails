@@ -24,10 +24,6 @@ module FastlyRails
     configuration.purging_enabled?
   end
 
-  def self.cache_headers_enabled?
-    configuration.cache_headers_enabled?
-  end
-
   def self.purge_by_key(*args)
     client.purge_by_key(*args) if purging_enabled?
   end
