@@ -5,8 +5,6 @@ require "fastly-rails/errors"
 
 module FastlyRails
 
-  attr_reader :client, :configuration
-
   def self.configuration
     @configuration ||= Configuration.new
   end
