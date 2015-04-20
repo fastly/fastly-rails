@@ -65,6 +65,22 @@ describe FastlyRails::Configuration do
     end
   end
 
+  describe 'purging_enabled?' do
+    it 'is enabled by default' do
+      assert_equal true, configuration.purging_enabled?
+    end
+
+    it 'is enabled when set to true' do
+      configuration.purging_enabled = true
+      assert_equal true, configuration.purging_enabled?
+    end
+
+    it 'is disabled when set to false' do
+      configuration.purging_enabled = false
+      assert_equal false, configuration.purging_enabled?
+    end
+  end
+
   it 'should have a default value for max_age since none was provided' do
     assert_equal FastlyRails::Configuration.max_age_default, configuration.max_age
   end

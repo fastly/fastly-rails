@@ -20,6 +20,14 @@ module FastlyRails
     configuration.service_id
   end
 
+  def self.purging_enabled?
+    configuration.purging_enabled?
+  end
+
+  def self.purge_by_key(*args)
+    client.purge_by_key(*args) if purging_enabled?
+  end
+
   def self.client
     raise NoAPIKeyProvidedError unless configuration.authenticatable?
 
