@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.4.0 / 2015-05-21
+  * New configuration item `purging_enabled` to simplify disabling/enabling of gem functionality
+
 ### 0.3.0 / 2015-03-12
   * Potentially Breaking Change: rename `service_id` methods to `fastly_service_identifier` in both the active_record and mongoid mix-ins (in response to https://github.com/fastly/fastly-rails/issues/36)
 
