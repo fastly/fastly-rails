@@ -4,7 +4,7 @@ describe FastlyRails::Client do
 
   let(:client) do
     FastlyRails::Client.new(
-      :api_key => 'KEY', :user => 'USER', :password => 'PASS'
+      :api_key => 'KEY'
     )
   end
 
@@ -51,12 +51,20 @@ describe FastlyRails::Client do
     end
 
     it 'should be authed' do
-      assert_equal true, client.fully_authed?
-
-      client.client.user = nil
-      client.client.password = nil
-      assert_equal false, client.fully_authed?
       assert_equal true, client.authed?
+      assert_equal false, client.fully_authed?
+    end
+
+    describe 'when username and password are supplied' do
+      before do
+        client.client.user = 'USER'
+        client.client.password = 'PASS'
+      end
+
+      it 'should be fully authed' do
+        assert_equal true, client.authed?
+        assert_equal true, client.fully_authed?
+      end
     end
   end
 
