@@ -4,3 +4,5 @@ script: 'bundle exec rake test:all'
 rvm:
   - 2.1.1
   - 1.9.3
+before_install:
+  - gem install bundler -v 1.11.2
