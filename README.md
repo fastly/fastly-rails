@@ -21,7 +21,7 @@ gem 'fastly-rails'
 
 ## Configuration
 
-For information about how to find your Fastly API Key or a Fastly Service ID, refer to our [documentation](https://docs.fastly.com/guides/faqs/where-can-i-find-my-service-id-customer-id-or-api-key).
+For information about how to find your Fastly API Key or a Fastly Service ID, refer to our [documentation](https://docs.fastly.com/guides/account-management-and-security/finding-and-managing-your-account-info).
 
 Create an initializer for Fastly configuration
 
