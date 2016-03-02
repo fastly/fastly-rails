@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.4.1 / 2016-03-01
+  * use fastly-ruby v1.2.1 (@phantomwhale)
+  * fix typo in documentation
+
 ### 0.4.0 / 2015-05-21
   * New configuration item `purging_enabled` to simplify disabling/enabling of gem functionality
 
