@@ -1,5 +1,8 @@
 # Changelog
 
+### 0.5.0 / 2016-04-04
+  * Depend on railties instead of rails (@clupprich)
+
 ### 0.4.1 / 2016-03-01
   * use fastly-ruby v1.2.1 (@phantomwhale)
   * fix typo in documentation
