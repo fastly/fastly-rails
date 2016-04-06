@@ -17,8 +17,6 @@ Gem::Specification.new do |s|
   s.add_dependency "railties"
   s.add_dependency 'fastly', '~> 1.2.1'
 
-  s.add_runtime_dependency('mime-types', ['>= 1.16', '< 3'])
-
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "database_cleaner"
   s.add_development_dependency "factory_girl_rails"
@@ -27,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "appraisal"
   s.add_development_dependency 'webmock'
   s.add_development_dependency 'rails'
+  s.add_development_dependency 'mime-types', '~> 1.25'
 end
