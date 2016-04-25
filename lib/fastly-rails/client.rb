@@ -1,4 +1,5 @@
 require 'fastly'
+require 'uri'
 
 module FastlyRails
   # A simple wrapper around the fastly-ruby client.
@@ -13,7 +14,7 @@ module FastlyRails
     end
 
     def purge_url(key)
-      "/service/#{FastlyRails.service_id}/purge/#{key}"
+      "/service/#{FastlyRails.service_id}/purge/#{URI.escape(key)}"
     end
   end
 end
