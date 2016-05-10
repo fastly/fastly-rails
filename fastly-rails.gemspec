@@ -5,8 +5,8 @@ require "fastly-rails/version"
 Gem::Specification.new do |s|
   s.name        = "fastly-rails"
   s.version     = FastlyRails::VERSION
-  s.authors     = ["Michael May", "Hassan Shahid", "Ezekiel Templin", "Thomas O'Neil"]
-  s.email       = ["michael@fastly.com", "hassan@fastly.com", "ezekiel@fastly.com", "tommy@fastly.com"]
+  s.authors     = ["Michael May", "Hassan Shahid", "Ezekiel Templin", "Thomas O'Neil", 'Blithe Rocher']
+  s.email       = ["michael@fastly.com", "hassan@fastly.com", "ezekiel@fastly.com", "tommy@fastly.com", 'blithe@fastly.com']
   s.homepage    = "https://github.com/fastly/fastly-rails"
   s.summary     = "Fastly instant purging integration for Rails"
   s.description = "Creates surrogate keys on ActiveRecord models, sets cache/surrogate headers, and adds a purge method to ActiveRecord objects."
