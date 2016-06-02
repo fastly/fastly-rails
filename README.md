@@ -99,7 +99,7 @@ end
 
 ### Purges
 
-Any object that inherits from ActiveRecord will have `purge_all` and `table_key` class methods available as well as `purge` and `purge_all` instance methods.
+Any object that inherits from ActiveRecord will have `purge_all`, `soft_purge_all`, and `table_key` class methods available as well as `purge`, `soft_purge`, `purge_all`, and `soft_purge_all` instance methods.
 
 Example usage is show below.
 

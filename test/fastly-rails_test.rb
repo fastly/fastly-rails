@@ -69,6 +69,16 @@ describe FastlyRails do
       end
     end
 
+    it 'allows soft purging' do
+      FastlyRails.stub(:client, client) do
+        FastlyRails.stub(:purging_enabled?, true) do
+          client.expect(:purge_by_key, nil, [key, true])
+          FastlyRails.purge_by_key(key, true)
+          client.verify
+        end
+      end
+    end
+
     it 'does nothing when purging is disabled' do
       configuration.purging_enabled = false
       FastlyRails.stub(:client, client) do
