@@ -12,7 +12,7 @@ describe Book do
 
   it "should have Fastly::SurrogateKey instance methods" do
 
-    [:record_key, :table_key, :purge, :purge_all].each do |method|
+    [:record_key, :table_key, :purge, :purge_all, :soft_purge, :soft_purge_all].each do |method|
       assert_respond_to book, method
     end
 
@@ -20,7 +20,7 @@ describe Book do
 
   it "should have Fastly::SurrogateKey class methods" do
 
-    [:table_key, :purge_all].each do |method|
+    [:table_key, :purge_all, :soft_purge_all].each do |method|
       assert_respond_to Book, method
     end
 

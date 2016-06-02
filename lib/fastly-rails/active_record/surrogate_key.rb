@@ -12,6 +12,10 @@ module FastlyRails
           FastlyRails.purge_by_key(table_key)
         end
 
+        def soft_purge_all
+          FastlyRails.purge_by_key(table_key, true)
+        end
+
         def table_key
           table_name
         end
@@ -33,8 +37,16 @@ module FastlyRails
         FastlyRails.purge_by_key(record_key)
       end
 
+      def soft_purge
+        FastlyRails.purge_by_key(record_key, true)
+      end
+
       def purge_all
         self.class.purge_all
+      end
+
+      def soft_purge_all
+        self.class.soft_purge_all
       end
 
       def fastly_service_identifier
