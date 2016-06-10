@@ -42,14 +42,6 @@ describe FastlyRails::Client do
       end
     end
 
-    it 'should call Fastly::Client.post method with the purge url' do
-      FastlyRails.configuration.service_id = 'testly'
-      assert_equal "/service/#{FastlyRails.service_id}/purge/test", client.purge_url('test')
-
-      resp = client.purge_by_key('test')
-      assert_equal "ok", resp['status']
-    end
-
     it 'should be authed' do
       assert_equal true, client.authed?
       assert_equal false, client.fully_authed?
