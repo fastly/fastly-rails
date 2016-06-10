@@ -8,9 +8,8 @@ module FastlyRails
       super(Fastly.new(opts))
     end
 
-    def purge_by_key(key)
-      client.require_key!
-      client.post purge_url(key)
+    def purge_by_key(*args)
+      Fastly::Service.new({id: FastlyRails.service_id}, FastlyRails.client).purge_by_key(*args)
     end
 
     def purge_url(key)
