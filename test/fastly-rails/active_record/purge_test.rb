@@ -21,4 +21,8 @@ describe FastlyRails::ActiveRecord::SurrogateKey do
   it 'performs a soft_purge' do
     assert_equal({ 'status' => 'ok' }, Book.new(id: 1).soft_purge)
   end
+
+  it 'performs a soft_purge_all' do
+    assert_equal({ 'status' => 'ok' }, Book.new(id: 1).soft_purge_all)
+  end
 end
