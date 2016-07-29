@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "railties"
-  s.add_dependency 'fastly', '~> 1.4'
+  s.add_dependency 'fastly', '~> 1.6'
 
   s.add_runtime_dependency('mime-types', ['>= 1.16', '< 3'])
 
