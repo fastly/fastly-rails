@@ -13,6 +13,8 @@ describe FastlyRails::Configuration do
       :user,
       :password,
       :max_age,
+      :stale_while_revalidate,
+      :stale_if_error,
       :service_id
     ]
 
