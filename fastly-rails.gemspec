@@ -25,6 +25,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "ffaker"
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "appraisal"
-  s.add_development_dependency 'webmock'
+  s.add_development_dependency 'webmock', ((RUBY_VERSION <= '1.9.3') ? '2.1.0' : '>= 2.3.0')
   s.add_development_dependency 'rails'
 end
