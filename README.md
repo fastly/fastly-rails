@@ -72,7 +72,7 @@ end
 
 ### Headers
 
-This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` or `after_filter` [see note on cookies below]() to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
+This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` or `after_filter` [see note on cookies below](https://github.com/fastly/fastly-rails#sessions-cookies-and-private-data) to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
