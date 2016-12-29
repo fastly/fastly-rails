@@ -8,6 +8,7 @@ require 'database_cleaner'
 require 'ffaker'
 require 'factory_girl_rails'
 require 'webmock/minitest'
+require 'rails-controller-testing'
 
 Rails.backtrace_cleaner.remove_silencers!
 

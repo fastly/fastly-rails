@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "railties", '< 5'
+  s.add_dependency "railties", '>= 4.2', '< 6'
   s.add_dependency 'fastly', '~> 1.6'
 
   s.add_runtime_dependency('mime-types', ['>= 1.16', '< 3'])
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "ffaker"
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "appraisal"
-  s.add_development_dependency 'webmock', ((RUBY_VERSION <= '1.9.3') ? '2.2.0' : '>= 2.3.0')
+  s.add_development_dependency 'webmock', '>= 2.3.0'
   s.add_development_dependency 'rails'
+  s.add_development_dependency 'rails-controller-testing'
 end
