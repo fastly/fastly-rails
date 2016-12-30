@@ -2,6 +2,7 @@ language: ruby
 before_script: 'bundle exec rake test:setup'
 script: 'bundle exec rake test:all'
 rvm:
+  - 2.3.1
   - 2.1.1
   - 1.9.3
 before_install:
