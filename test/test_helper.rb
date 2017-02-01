@@ -52,6 +52,7 @@ class ActionController::TestCase
 end
 
 class ActionDispatch::IntegrationTest
+  include WebMock::API
   include FactoryGirl::Syntax::Methods
 
   def setup
