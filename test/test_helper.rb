@@ -9,6 +9,11 @@ require 'ffaker'
 require 'factory_girl_rails'
 require 'webmock/minitest'
 
+begin
+  require 'rails-controller-testing'
+rescue LoadError
+end
+
 Rails.backtrace_cleaner.remove_silencers!
 
 #include factories
