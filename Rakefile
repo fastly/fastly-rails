@@ -22,6 +22,7 @@ Bundler::GemHelper.install_tasks
 namespace :test do
   desc 'Install dependencies for all tests with appraisal'
   task :setup do
+    sh 'bin/rails db:environment:set RAILS_ENV=test 2>&1 >/dev/null || exit 0'
     sh 'appraisal install'
   end
 
