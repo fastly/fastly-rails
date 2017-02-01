@@ -16,6 +16,11 @@ module FastlyRails
     ActiveSupport.on_load :action_controller do
       ActionController::Base.send :include, FastlyRails::CacheControlHeaders
       ActionController::Base.send :include, FastlyRails::SurrogateKeyHeaders
+
+      if defined?(ActionController::API)
+        ActionController::API.send :include, FastlyRails::CacheControlHeaders
+        ActionController::API.send :include, FastlyRails::SurrogateKeyHeaders
+      end
     end
 
     ActiveSupport.on_load :active_record do
