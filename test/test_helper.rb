@@ -43,6 +43,8 @@ class Minitest::Spec
       body: "{\"status\":\"ok\"}"
     )
 
+    WebMock.disable_net_connect!
+
     DatabaseCleaner.start
   end
 
