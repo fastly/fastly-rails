@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/fastly/fastly-rails/tree/HEAD)
-
-[Full Changelog](https://github.com/fastly/fastly-rails/compare/v0.7.1...HEAD)
+## [v0.8.0](https://github.com/fastly/fastly-rails/tree/v0.8.0) (2017-02-03)
+[Full Changelog](https://github.com/fastly/fastly-rails/compare/v0.7.1...v0.8.0)
 
 **Fixed bugs:**
 
