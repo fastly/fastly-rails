@@ -12,14 +12,17 @@ module FastlyRails
     def set_cache_control_headers(max_age = FastlyRails.configuration.max_age, opts = {})
       request.session_options[:skip] = true    # no cookies
       response.headers['Cache-Control'] = opts[:cache_control] || "public, no-cache"
-      response.headers['Surrogate-Control'] = opts[:surrogate_control] || build_surrogate_control(max_age)
+      response.headers['Surrogate-Control'] = opts[:surrogate_control] || build_surrogate_control(max_age, opts)
     end
 
     private
-    def build_surrogate_control(max_age)
+    def build_surrogate_control(max_age, opts)
       surrogate_control = "max-age=#{max_age}"
-      surrogate_control += ", stale-while-revalidate=#{FastlyRails.configuration.stale_while_revalidate}" if FastlyRails.configuration.stale_while_revalidate
-      surrogate_control += ", stale-if-error=#{FastlyRails.configuration.stale_if_error}" if FastlyRails.configuration.stale_if_error
+      stale_while_revalidate = opts[:stale_while_revalidate] || FastlyRails.configuration.stale_while_revalidate
+      stale_if_error = opts[:stale_if_error] || FastlyRails.configuration.stale_if_error
+
+      surrogate_control += ", stale-while-revalidate=#{stale_while_revalidate}" if stale_while_revalidate
+      surrogate_control += ", stale-if-error=#{stale_if_error}" if stale_if_error
       surrogate_control
     end
   end
