@@ -168,7 +168,7 @@ end
 By default, Fastly will not cache any response containing a `Set-Cookie` header. In general, this is beneficial because caching responses that contain sensitive data is typically not done on shared caches.
 
 In this plugin the `set_cache_control_headers` method removes the `Set-Cookie` header from a
-request. In some cases, other libraries, particularily middleware, may insert or modify HTTP Headers outside the scope of where the `set_cache_control_heades` method is invoked in a controller action. For example, some authentication middleware will add a `Set-Cookie` header into requests *after* fastly-rails removes it.
+response. In some cases, other libraries, particularily middleware, may insert or modify HTTP Headers outside the scope of where the `set_cache_control_heades` method is invoked in a controller action. For example, some authentication middleware will add a `Set-Cookie` header into requests *after* fastly-rails removes it.
 
 This can cause some requests that can (and should) be cached to not be cached due to the presence of `Set-Cookie`.
 
