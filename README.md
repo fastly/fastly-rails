@@ -137,7 +137,7 @@ end
 To simplify controller methods, you could use ActiveRecord callbacks. e.g.
 
 ````ruby
-class Book < ActiveRecord
+class Book < ActiveRecord::Base
   after_create :purge_all
   after_save :purge
   after_destroy :purge, :purge_all
