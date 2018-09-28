@@ -94,7 +94,7 @@ describe FastlyRails do
     it 'delegates to the client when purging is enabled' do
       FastlyRails.stub(:client, client) do
         FastlyRails.stub(:purging_enabled?, true) do
-          client.expect(:purge_by_url, nil, [url])
+          client.expect(:purge, nil, [url])
           FastlyRails.purge_by_url(url)
           client.verify
         end
@@ -104,7 +104,7 @@ describe FastlyRails do
     it 'allows soft purging' do
       FastlyRails.stub(:client, client) do
         FastlyRails.stub(:purging_enabled?, true) do
-          client.expect(:purge_by_url, nil, [url, true])
+          client.expect(:purge, nil, [url, true])
           FastlyRails.purge_by_url(url, true)
           client.verify
         end
