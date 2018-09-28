@@ -94,7 +94,7 @@ describe FastlyRails do
     it 'delegates to the client when purging is enabled' do
       FastlyRails.stub(:client, client) do
         FastlyRails.stub(:purging_enabled?, true) do
-          client.expect(:purge, nil, [url])
+          client.expect(:purge, nil, [url, false])
           FastlyRails.purge_by_url(url)
           client.verify
         end
