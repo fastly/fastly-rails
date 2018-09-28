@@ -86,4 +86,36 @@ describe FastlyRails do
       end
     end
   end
+
+  describe 'purge_by_url' do
+    let(:client) {  MiniTest::Mock.new }
+    let(:url) { "http://test.com" }
+
+    it 'delegates to the client when purging is enabled' do
+      FastlyRails.stub(:client, client) do
+        FastlyRails.stub(:purging_enabled?, true) do
+          client.expect(:purge_by_url, nil, [url])
+          FastlyRails.purge_by_url(url)
+          client.verify
+        end
+      end
+    end
+
+    it 'allows soft purging' do
+      FastlyRails.stub(:client, client) do
+        FastlyRails.stub(:purging_enabled?, true) do
+          client.expect(:purge_by_url, nil, [url, true])
+          FastlyRails.purge_by_url(url, true)
+          client.verify
+        end
+      end
+    end
+
+    it 'does nothing when purging is disabled' do
+      configuration.purging_enabled = false
+      FastlyRails.stub(:client, client) do
+        FastlyRails.purge_by_url(url)
+      end
+    end
+  end
 end
