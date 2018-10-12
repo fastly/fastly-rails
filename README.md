@@ -74,7 +74,7 @@ end
 
 ### Headers
 
-This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` or `after_filter` [see note on cookies below](https://github.com/fastly/fastly-rails#sessions-cookies-and-private-data) to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
+This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_action` or `after_action` [see note on cookies below](https://github.com/fastly/fastly-rails#sessions-cookies-and-private-data) to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
@@ -82,10 +82,10 @@ To do this use the `set_surrogate_key_header` method on GET actions.
 
 ````ruby
 class BooksController < ApplicationController
-  # include this before_filter in controller endpoints that you wish to edge cache
-  before_filter :set_cache_control_headers, only: [:index, :show]
+  # include this before_action in controller endpoints that you wish to edge cache
+  before_action :set_cache_control_headers, only: [:index, :show]
   # This can be used with any customer actions. Set these headers for GETs that you want to cache
-  # e.g. before_filter :set_cache_control_headers, only: [:index, :show, :my_custom_action]
+  # e.g. before_action :set_cache_control_headers, only: [:index, :show, :my_custom_action]
 
   def index
     @books = Book.all
