@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
-  before_filter :set_cache_control_headers, only: [:index, :show]
-  before_filter :find_book, :only => [:show, :edit, :update, :destroy]
+  before_action :set_cache_control_headers, only: [:index, :show]
+  before_action :find_book, :only => [:show, :edit, :update, :destroy]
 
   def index
     @books = Book.all
@@ -29,12 +29,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    if rails_4?
-      method = :update
-    else
-      method = :update_attributes
-    end
-    if @book.send(method, books_params)
+    if @book.update(books_params)
       redirect_to book_path(@book)
     else
       flash[:notice] = "failed to update book"
@@ -54,11 +49,7 @@ class BooksController < ApplicationController
   private
 
   def books_params
-    if rails_4?
-      params.require(:book).permit!
-    else
-      params[:book]
-    end
+    params.require(:book).permit!
   end
 
   def find_book

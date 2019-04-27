@@ -43,8 +43,8 @@ describe FastlyRails do
 
     it 'should have configuration options set up' do
       assert_equal api_key, configuration.api_key
-      assert_equal user, configuration.user
-      assert_equal password, configuration.password
+      assert_nil user, configuration.user
+      assert_nil password, configuration.password
       assert_equal max_age, configuration.max_age
       assert_equal service_id, configuration.service_id
       assert_equal true, configuration.purging_enabled?

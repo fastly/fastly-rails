@@ -228,13 +228,10 @@ $ appraisal rails-3 rake test # finds a defined version in the Appraisals file c
 We [run tests](https://travis-ci.org/fastly/fastly-rails) using all combinations of the following versions of Ruby and Rails:
 
 Ruby:
-  - 1.9.3
-  - 2.1.1
+  - 2.6.3
 
 Rails:
-  - v3.2.18
-  - v4.0.5
-  - v4.1.1
+  - v5.2.3
 
 ### Other Platforms
 As of v0.1.2, *experimental* Mongoid support was added by @joshfrench of [Upworthy](http://www.upworthy.com/).
