@@ -74,7 +74,7 @@ end
 
 ### Headers
 
-This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_filter` or `after_filter` [see note on cookies below](https://github.com/fastly/fastly-rails#sessions-cookies-and-private-data) to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
+This plugin adds a `set_cache_control_headers` method to ActionController. You'll need to add this in a `before_action` or `after_action` [see note on cookies below](https://github.com/fastly/fastly-rails#sessions-cookies-and-private-data) to any controller action that you wish to edge cache (see example below). The method sets Cache-Control and Surrogate-Control HTTP Headers with a default of 30 days (remember you can configure this, see the initializer setup above).
 
 It's up to you to set Surrogate-Key headers for objects that you want to be able to purge.
 
@@ -82,10 +82,10 @@ To do this use the `set_surrogate_key_header` method on GET actions.
 
 ````ruby
 class BooksController < ApplicationController
-  # include this before_filter in controller endpoints that you wish to edge cache
-  before_filter :set_cache_control_headers, only: [:index, :show]
+  # include this before_action in controller endpoints that you wish to edge cache
+  before_action :set_cache_control_headers, only: [:index, :show]
   # This can be used with any customer actions. Set these headers for GETs that you want to cache
-  # e.g. before_filter :set_cache_control_headers, only: [:index, :show, :my_custom_action]
+  # e.g. before_action :set_cache_control_headers, only: [:index, :show, :my_custom_action]
 
   def index
     @books = Book.all
@@ -228,13 +228,13 @@ $ appraisal rails-3 rake test # finds a defined version in the Appraisals file c
 We [run tests](https://travis-ci.org/fastly/fastly-rails) using all combinations of the following versions of Ruby and Rails:
 
 Ruby:
-  - 1.9.3
-  - 2.1.1
+  - 2.6.3
+  - 2.5.5
+  - 2.4.6
 
 Rails:
-  - v3.2.18
-  - v4.0.5
-  - v4.1.1
+  - v4.2.11.1
+  - v5.2.3
 
 ### Other Platforms
 As of v0.1.2, *experimental* Mongoid support was added by @joshfrench of [Upworthy](http://www.upworthy.com/).

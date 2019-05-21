@@ -8,3 +8,6 @@ test/dummy/tmp/
 test/dummy/.sass-cache
 gemfiles/*.lock
 Gemfile.lock
+.DS_Store
+.ruby-gemset
+.ruby-version

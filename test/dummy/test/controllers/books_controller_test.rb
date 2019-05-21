@@ -27,7 +27,7 @@ class BooksControllerTest < ActionController::TestCase
 
   test "show" do
     expected_id = 1
-    get :show, {:id => expected_id}
+    get :show, params: { id: expected_id}
     assert_response :success, 'it should return successfully'
     assert_not_nil assigns(:book), '@book should not be nil'
     assert_instance_of Book, assigns(:book), 'it should be an instance of a book'
@@ -38,7 +38,7 @@ class BooksControllerTest < ActionController::TestCase
   test "create" do
     expected_name = 'newly-created-book'
     assert_difference('Book.count') do
-      post :create, :book => {'name' => expected_name}
+      post :create, params: { book: {'name' => expected_name}}
     end
   end
 end
