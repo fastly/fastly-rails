@@ -1,5 +1,14 @@
 # Fastly Rails Plugin [![Build Status](https://travis-ci.org/fastly/fastly-rails.svg?branch=master)](https://travis-ci.org/fastly/fastly-rails)
 
+**Deprecation Notice**
+
+This repository has been deprecated. The official Fastly Ruby [client](https://docs.fastly.com/api/clients#ruby) is the [fastly-ruby](https://github.com/fastly/fastly-ruby) gem.
+
+Although this repository is no longer supported, it could be useful as a reference.
+
+----
+
+# Introduction
 Fastly dynamic caching integration for Rails.
 
 To use Fastly dynamic caching, you tag *any* response you wish to cache with unique Surrogate-Key HTTP Header(s) and then hit the Fastly API purge endpoint with the surrogate key when the response changes. The purge instantly replaces the cached response with a fresh response from origin.
