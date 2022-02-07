@@ -6,7 +6,7 @@ require "rails/test_help"
 require "minitest/autorun"
 require 'database_cleaner'
 require 'ffaker'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 require 'webmock/minitest'
 
 begin
@@ -27,10 +27,10 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 #   ActiveSupport::TestCase.fixtures :all
 # end
 
-ActiveRecord::Migrator.migrate File.expand_path('../dummy/db/migrate/', __FILE__)
+ActiveRecord::MigrationContext.new(File.expand_path('../dummy/db/migrate', __FILE__)).migrate
 
 class Minitest::Spec
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   before :each do
     stub_request(:any, "https://api.fastly.com/login").
@@ -55,12 +55,12 @@ class Minitest::Spec
 end
 
 class ActionController::TestCase
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 end
 
 class ActionDispatch::IntegrationTest
   include WebMock::API
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 
   def setup
     stub_request(:any, /.*/).

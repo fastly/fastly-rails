@@ -15,14 +15,15 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "railties", '> 2', '< 6'
-  s.add_dependency 'fastly', '~> 1.6'
+  s.add_dependency 'fastly', '~> 2.3.0'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "database_cleaner"
-  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "ffaker"
   s.add_development_dependency "minitest-spec-rails"
   s.add_development_dependency "appraisal"
+  s.add_development_dependency "rails-controller-testing"
   s.add_development_dependency 'webmock', ((RUBY_VERSION <= '1.9.3') ? '2.2.0' : '>= 2.3.0')
   s.add_development_dependency 'rails'
 end

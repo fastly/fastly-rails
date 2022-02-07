@@ -1,8 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
+# Read about factories at https://github.com/thoughtbot/factory_bot
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :book do
-    name 'some book name'
-    service_id 'asdf'
+    name { 'some book name' }
+    service_id { 'asdf' }
   end
 end
